@@ -10,7 +10,7 @@ var db = new PouchDB('stickyNotes');
       };
       db.put(sticky_note, function callback(err, result) {
         if (!err) {
-          console.log('Successfully a sticky note!');
+          console.log('Successfully added a sticky note!');
         }
       });
       
@@ -24,7 +24,7 @@ var db = new PouchDB('stickyNotes');
           for (var key in final_response) {
             if (final_response.hasOwnProperty(key)) {
               var sticky_content = final_response[key].doc.content;
-              $('#sticky_notes_area').append(i+". "+sticky_content+'<br>');
+              $('#sticky_notes_area').append("<p class='color_sticky'>"+i+". "+sticky_content+'</p>');
             }
             i++;
             lastIndex = i;
@@ -40,9 +40,10 @@ var db = new PouchDB('stickyNotes');
         
         addSticky(content);
         
-        $('#sticky_notes_area').append(lastIndex+". "+content+'<br>');
+        $('#sticky_notes_text').val('');
+        $('#sticky_notes_area').append("<p class='color_sticky'>"+lastIndex+". "+content+'</p>');
         lastIndex++;
       });
       
       
-    });1
+    });
