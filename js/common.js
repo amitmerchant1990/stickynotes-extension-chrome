@@ -24,7 +24,7 @@ var db = new PouchDB('stickyNotes');
           for (var key in final_response) {
             if (final_response.hasOwnProperty(key)) {
               var sticky_content = final_response[key].doc.content;
-              $('#sticky_notes_area').append("<p class='color_sticky'>"+i+". "+sticky_content+'</p>');
+              $('#sticky_notes_area').append("<div class='color_sticky'><p>"+i+". "+sticky_content+'</p></div>');
             }
             i++;
             lastIndex = i;
@@ -37,12 +37,12 @@ var db = new PouchDB('stickyNotes');
       fetchStickys();
       $('#sticky_notes_add').click(function(){
         var content = $('#sticky_notes_text').val();
-        
+        if(content!=''){
         addSticky(content);
-        
-        $('#sticky_notes_text').val('');
-        $('#sticky_notes_area').append("<p class='color_sticky'>"+lastIndex+". "+content+'</p>');
-        lastIndex++;
+          $('#sticky_notes_text').val('');
+          $('#sticky_notes_area').append("<div class='color_sticky'><p>"+lastIndex+". "+content+'</p></div>');
+          lastIndex++;
+        }
       });
       
       

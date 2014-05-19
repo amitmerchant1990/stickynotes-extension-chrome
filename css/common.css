@@ -219,6 +219,9 @@ table.head-wrap,table.body-wrap,.content table,.column table {
 #sticky_notes_area{
   margin-top: 10px;
   max-height: 186px;
-overflow-y: scroll;
+overflow: auto;
 }
+
+.sticky_delete{
+  
 }
