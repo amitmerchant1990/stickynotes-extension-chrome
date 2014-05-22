@@ -2,46 +2,47 @@ var db = new PouchDB('stickyNotes');
     var lastIndex = 1;
     var remoteCouch = false;
    
-    function addSticky(sticky){
-      
-      var sticky_note = {
-        _id: new Date().toISOString(),
-       content: sticky
-      };
-      db.put(sticky_note, function callback(err, result) {
-        if (!err) {
-          console.log('Successfully added a sticky note!');
-        }
-      });
-      
+    function map(doc) {
+      if (doc.title) {
+        emit(doc.title);
+      }
     }
-    
-    function fetchStickys(){
-      db.allDocs({include_docs: true}, function(err, response) {
-          console.log(response.rows);
-          var final_response = response.rows;
-          var i = 1;
-          for (var key in final_response) {
-            if (final_response.hasOwnProperty(key)) {
+   
+    db.query({map: map}, {id: 'ultimate_sticky'}, function(err, final_response) { 
+        for (var key in final_response) {
+            if (final_response[key].doc.key=='ultimate_sticky' && final_response[key].doc.content!='') {
               var sticky_content = final_response[key].doc.content;
-              $('#sticky_notes_area').append("<div class='color_sticky'><p>"+i+". "+sticky_content+'</p></div>');
+              //$('#sticky_notes_area').append("<div class='color_sticky'><p>"+i+". "+sticky_content+'</p></div>');
+              ('#txt').val(sticky_content)
+            }else{
+              var sticky_note = {
+                _id: 'ultimate_sticky',
+               content: ""
+              };
+              db.put(sticky_note, function callback(err, result) {
+                if (!err) {
+                  console.log('Successfully added a sticky note!');
+                }
+              });
             }
-            i++;
-            lastIndex = i;
           }
-          
-      });
-    }
     
+    });
+     
     $(document).ready(function(){
-      fetchStickys();
-      $('#sticky_notes_add').click(function(){
-        var content = $('#sticky_notes_text').val();
+      
+      $('#txt').keyup(function(){
+        var content = $('#txt').val();
         if(content!=''){
-        addSticky(content);
-          $('#sticky_notes_text').val('');
-          $('#sticky_notes_area').append("<div class='color_sticky'><p>"+lastIndex+". "+content+'</p></div>');
-          lastIndex++;
+        var sticky_note = {
+                _id: 'ultimate_sticky',
+               content: content
+              };
+              db.put(sticky_note, function callback(err, result) {
+                if (!err) {
+                  console.log('Successfully added a sticky note!');
+                }
+              });
         }
       });
       

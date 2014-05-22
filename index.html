@@ -1,38 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head> 
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> 
 	<link href='css/common.css' rel='stylesheet' type='text/css'> 
-
-	<meta name="viewport" content="width=device-width" /> 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-
-	<title>Sticky Notes</title> 
-
+  
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/pouchdb-2.2.0.min.js"></script>
   <script type="text/javascript" src="js/common.js"></script>
 	<base target="_blank">
-
 </head>
-
-
-<body bgcolor="#FFF"> 
-	<table class="body-wrap"> 
-		<tr> 
-			<td class="container"> 
-				<div class="content"> 
-					<div id="pattern" class="pattern"> 
-							<input type="search" name="s" id="sticky_notes_text" placeholder="Add notes" /> 
-							<input type="button" id="sticky_notes_add" class="btn search-submit" value="Add"> 
-					</div> 
-					<div id="sticky_notes_area"></div> 
-				</div> 
-			</td>
-		</tr> 
-	</table> 
+<body> 
+	<textarea id="txt">
+      Start writing your sticky notes right here.
+  </textarea>
 </body>
 </html>
 
